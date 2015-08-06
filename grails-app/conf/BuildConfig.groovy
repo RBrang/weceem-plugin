@@ -33,8 +33,10 @@ grails.project.dependency.resolution = {
 
 	plugins {
         // plugins for the build system only
-        build   ':tomcat:7.0.55'
-        runtime(':hibernate4:4.3.6.1') {
+        build (':tomcat:7.0.55') {
+            export = false
+        }
+        runtime (':hibernate4:4.3.6.1') {
             export = false
         }
 
@@ -59,7 +61,9 @@ grails.project.dependency.resolution = {
             excludes "xerces, xml-apis"
             export = false
         }
-        build ':release:3.0.1'
+        build (':release:3.0.1') {
+            export = false
+        }
         // For serlvet filter ordering
         provided ':webxml:1.4.1'
  	}
