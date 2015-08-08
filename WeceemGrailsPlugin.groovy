@@ -70,8 +70,16 @@ class WeceemGrailsPlugin {
         }
         
         // Configure caching
+        boolean hasWeceemEhCacheConfigXML = new PathMatchingResourcePatternResolver().getResource('classpath:/weceem-custom-ehcache.xml').exists()
         boolean hasEhCacheConfigXML = new PathMatchingResourcePatternResolver().getResource('classpath:/ehcache.xml').exists()
-        if (hasEhCacheConfigXML) {
+		if( hasWeceemEhCacheConfigXML ){
+			// init with custom Weceem caching
+			def weceemConfigRes = new PathMatchingResourcePatternResolver().getResource('classpath:/weceem-custom-ehcache.xml')
+			println "Weceem: Initializing ehcache with CUSTOM weceem-custom-ehcache.xml from plugin resource: ${weceemConfigRes}"
+			weceemCacheManager(net.sf.ehcache.CacheManager, weceemConfigRes.URL) { bean ->
+				bean.destroyMethod = 'shutdown'
+			}
+		} else if (hasEhCacheConfigXML) {
             // We assume app dev is managing cache with their own ehcache.xml
             println "Weceem: Initializing ehcache with default ehcache.xml from application"
             weceemCacheManager(net.sf.ehcache.CacheManager) { bean -> 
