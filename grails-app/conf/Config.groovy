@@ -40,6 +40,7 @@ elasticSearch.datastoreImpl = 'hibernateDatastore'
 elasticSearch.disableAutoIndex = 'false'
 elasticSearch.bulkIndexOnStartup = true
 elasticSearch.unmarshallComponents = false
+elasticSearch.client.mode = 'local'
 
 environments {
     development {

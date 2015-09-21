@@ -33,13 +33,15 @@ grails.project.dependency.resolution = {
 
 	plugins {
         // plugins for the build system only
-        build   ':tomcat:7.0.55'
+        build   (':tomcat:7.0.55') {
+            export = false
+        }
         runtime(':hibernate4:4.3.6.1') {
             export = false
         }
 
         runtime ':database-migration:1.4.0'
-        runtime ':elasticsearch:0.0.3.6'
+        runtime ':elasticsearch:0.0.4.6'
 
         compile ':scaffolding:2.1.2'
         compile ':cache:1.1.8'
